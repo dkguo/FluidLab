@@ -77,7 +77,28 @@ class FluidEnv(gym.Env):
         pass
 
     def setup_renderer(self):
-        self.taichi_env.setup_renderer()
+        if self.renderer_type == 'GGUI':
+            self.taichi_env.setup_renderer(
+                res=(960, 960),
+                camera_pos=(-0.15, 2.82, 2.5),
+                camera_lookat=(0.5, 0.5, 0.5),
+                fov=30,
+                lights=[{'pos': (0.5, 1.5, 0.5), 'color': (0.5, 0.5, 0.5)},
+                        {'pos': (0.5, 1.5, 1.5), 'color': (0.5, 0.5, 0.5)}],
+            )
+        elif self.renderer_type == 'GL':
+            self.taichi_env.setup_renderer(
+                type='GL',
+                render_particle=True,
+                camera_pos=(-0.15, 2.82, 2.5),
+                camera_lookat=(0.5, 0.5, 0.5),
+                fov=30,
+                light_pos=(3.5, 15.0, 0.55),
+                light_lookat=(0.5, 0.5, 0.49),
+                light_fov=20,
+            )
+        else:
+            raise NotImplementedError
 
     def setup_loss(self):
         pass

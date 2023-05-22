@@ -22,7 +22,7 @@ def get_args():
     parser.add_argument("--replay_policy", action='store_true')
     parser.add_argument("--replay_target", action='store_true')
     parser.add_argument("--path", type=str, default=None)
-    parser.add_argument("--renderer_type", type=str, default='GGUI')
+    parser.add_argument("--renderer_type", type=str, default='GL')
 
 
     args = parser.parse_args()
